@@ -18,6 +18,7 @@
   "homepage": "https://github.com/henaas-bananacrab/React_API#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "better-sqlite3": "^12.4.1",
     "express": "^5.1.0"
   }
 }
