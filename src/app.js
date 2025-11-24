@@ -15,5 +15,5 @@ app.use('/api/v1/movies', movieRoutes);
 
 
 app.listen(3002, () => {
-    console.log('Server rueeing on port 3002');
+    console.log('Server running on port 3002');
 })
