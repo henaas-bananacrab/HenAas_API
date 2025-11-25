@@ -20,8 +20,8 @@ const getSingleMovie = async (req, res) => {
 
 const createMovie = async (req, res) => {
     try {
-        const { name, releaseYear } = req.body;
-        const newMovie = await addObject({ name, releaseYear});
+        const { title, director, releaseYear } = req.body;
+        const newMovie = await addObject({ title, director, releaseYear});
         res.status(201).json({success: true, data: newMovie});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});
@@ -31,8 +31,8 @@ const createMovie = async (req, res) => {
 const updateMovie = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, releaseYear } = req.body;
-        const updateObject = await updateObjectById(id, { name, releaseYear});
+        const { title, director, releaseYear } = req.body;
+        const updateObject = await updateObjectById(id, { title, director, releaseYear});
         res.status(200).json({success: true, data: updateObject});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});

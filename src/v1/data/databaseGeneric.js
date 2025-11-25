@@ -53,13 +53,13 @@ const updateObjectById = (id, updatedObject) => {
         objects[index] = { ...objects[index], ...updatedObject };
         return objects[index];
     }
-    return null; // Return null if object with the given id does not exist
+    return null;
 }
 
-module.export = {
+module.exports = {
     getAllObjects,
     addObject,
     getObjectById,
     deleteObjectById,
     updateObjectById
-};
+}
