@@ -1,4 +1,4 @@
-const {getAllObjects, getObjectById, addObject, updateObjectById, deleteObjectById} = require('../data/databaseGeneric');
+const {getAllObjects, getObjectById, getObjectPlotById, addObject, updateObjectById, deleteObjectById} = require('../data/databaseGenericV2');
 
 const getAllMovies = async (req, res) => {
     try {
@@ -18,10 +18,23 @@ const getSingleMovie = async (req, res) => {
     }
 };
 
+const getSingleMoviePlot = async (req, res) => {
+    try {
+        const plotSummary = await getObjectPlotById(req.params.id);
+        if (plotSummary) {
+            res.status(200).json({success: true, data: plotSummary});
+        } else {
+            res.status(404).json({success: false, error: 'Movie plot not found'});
+        }
+    } catch (error) {
+        res.status(500).json({success: false, error: 'something went wrong'});
+    }
+};
+
 const createMovie = async (req, res) => {
     try {
-        const { title, director, releaseYear } = req.body;
-        const newMovie = await addObject({ title, director, releaseYear});
+        const { movieTitle, director, releaseYear, genre, ageRating, imdbRating } = req.body;
+        const newMovie = await addObject({ movieTitle, info: { director, releaseYear, genre, ageRating, imdbRating } });
         res.status(201).json({success: true, data: newMovie});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});
@@ -32,28 +45,7 @@ const updateMovie = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, director, releaseYear } = req.body;
-        //const oldObject = await getObjectById(req.params.id);
-        /*if (!title) {
-            const newTitle = oldObject.title;
-            console.log(newTitle);
-        } else {
-            const newTitle = title;
-        }
-        
-        if (!director) {
-            const newDirector = oldObject.director;
-            console.log(newDirector);
-        } else {
-            const newDirector = director;
-        }
-        
-        if (!releaseYear) {
-            const newReleaseYear = oldObject.releaseYear;
-            console.log(newReleaseYear);
-        } else {
-            const newReleaseYear = releaseYear;
-        }*/
-        const updateObject = await updateObjectById(id, { title, director, releaseYear  /*newTitle, newDirector, newReleaseYear*/});
+        const updateObject = await updateObjectById(id, { title, director, releaseYear});
         res.status(200).json({success: true, data: updateObject});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});
@@ -70,4 +62,4 @@ const deleteMovie = async (req, res) => {
     }
 };
 
-module.exports = { getAllMovies, getSingleMovie, createMovie, updateMovie, deleteMovie };
+module.exports = { getAllMovies, getSingleMovie, getSingleMoviePlot, createMovie, updateMovie, deleteMovie };
