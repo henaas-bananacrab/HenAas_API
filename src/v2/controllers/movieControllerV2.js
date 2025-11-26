@@ -1,5 +1,6 @@
 const {getAllObjects, getObjectById, getObjectPlotById, addObject, updateObjectById, deleteObjectById} = require('../data/databaseGenericV2');
 
+// get all movies and the data associated with them
 const getAllMovies = async (req, res) => {
     try {
         const movies = await getAllObjects();
@@ -33,8 +34,8 @@ const getSingleMoviePlot = async (req, res) => {
 
 const createMovie = async (req, res) => {
     try {
-        const { movieTitle, director, releaseYear, genre, ageRating, imdbRating } = req.body;
-        const newMovie = await addObject({ movieTitle, info: { director, releaseYear, genre, ageRating, imdbRating } });
+        const { movieTitle, director, releaseYear, genre, ageRating, imdbRating, plotSummary } = req.body;
+        const newMovie = await addObject({ movieTitle, info: { director, releaseYear, genre, ageRating, imdbRating, plotSummary } });
         res.status(201).json({success: true, data: newMovie});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});
@@ -44,8 +45,8 @@ const createMovie = async (req, res) => {
 const updateMovie = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, director, releaseYear } = req.body;
-        const updateObject = await updateObjectById(id, { title, director, releaseYear});
+        const { movieTitle, director, releaseYear, genre, ageRating, imdbRating, plotSummary } = req.body;
+        const updateObject = await updateObjectById(id, { movieTitle, info: { director, releaseYear, genre, ageRating, imdbRating, plotSummary } });
         res.status(200).json({success: true, data: updateObject});
     } catch (error) {
         res.status(500).json({success: false, error: 'something went wrong'});
