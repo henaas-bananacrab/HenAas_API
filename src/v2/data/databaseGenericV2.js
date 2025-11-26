@@ -1,5 +1,6 @@
 let objects = [ // add a variable called "info" to each object that contains (director + releaseYear + rating + genre)||change "title" to "movieTitle"
-    { id: 1, movieTitle: 'Nosferatu',
+    { id: 1, 
+        movieTitle: 'Nosferatu',
         info: { genre: 'Horror',
             ageRating: 'PG',
             director: 'F.W. Murnau',
