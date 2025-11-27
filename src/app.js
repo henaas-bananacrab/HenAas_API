@@ -1,7 +1,7 @@
 const express = require('express');
 
-const movieRoutes = require('./v1/routes/movieRoutes');
-const movieRoutesV2 = require('./v2/routes/movieRoutesV2');
+const movieRoutes = require('./v1.0.0/routes/movieRoutes');
+const movieRoutesV2 = require('./v2.0.0/routes/movieRoutesV2');
 
 const app = express();
 const cors = require('cors');
